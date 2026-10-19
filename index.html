@@ -22,21 +22,24 @@
             overflow: hidden;
         }
 
+        /* Không gian 3D cho thiệp */
         .book-container {
             perspective: 1500px;
             width: 100%;
             max-width: 360px;
         }
 
+        /* Khung thiệp chính */
         .book {
             position: relative;
             width: 100%;
             background: #ffffff;
-            border-radius: 0 15px 15px 0;
-            box-shadow: 10px 15px 30px rgba(233, 30, 99, 0.25);
-            border-left: 12px solid #c2185b;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.25);
+            border: 2px dashed #ff4081; /* Đổi sang đường viền nét đứt màu hồng cho thiệp lật lên */
         }
 
+        /* Trang bên phải (Văn bản lời chúc) */
         .book-inside {
             padding: 30px 20px;
             text-align: center;
@@ -45,6 +48,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            opacity: 0; /* Văn bản ẩn khi thiệp đóng */
         }
 
         .inside-title {
@@ -69,13 +73,14 @@
             font-size: 16px;
         }
 
+        /* Bìa thiệp - Đổi trục xoay sang LẬT MỞ LÊN TRÊN */
         .book-cover-wrapper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            transform-origin: left;
+            transform-origin: top; /* Trục lật là cạnh TRÊN */
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
             transform-style: preserve-3d;
             cursor: pointer;
@@ -83,8 +88,13 @@
         }
 
         #book-toggle:checked ~ .book .book-cover-wrapper {
-            transform: rotateY(-160deg);
-            pointer-events: none;
+            transform: rotateX(-160deg); /* Lật LÊN TRÊN -160 độ */
+            pointer-events: none; /* Khóa nút bấm: Lật ra rồi không đóng được */
+        }
+
+        /* Hiển thị văn bản chúc mừng sau khi nắp thiệp lật xong */
+        #book-toggle:checked ~ .book .book-inside {
+            animation: fadeInText 1s 0.8s forwards;
         }
 
         .book-cover {
@@ -98,10 +108,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 0 15px 15px 0;
+            border-radius: 15px;
             box-sizing: border-box;
         }
 
+            /* Bìa trước */
             .book-cover.front {
                 background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
                 color: white;
@@ -109,12 +120,14 @@
                 text-align: center;
             }
 
+            /* TRANG SAU (Mặt lật lên trên - Chứa ảnh của Mẹ) */
             .book-cover.back {
-                background: #fff0f5;
-                transform: rotateY(180deg);
-                border-radius: 15px 0 0 15px;
+                background: #fff0f5; /* Nền hồng nhạt */
+                /* transform: rotateY(180deg); -> BỎ xoay trục Y. Cần xoay X để nội dung lộn ngược và khi lật lên nó hiển thị đúng. */
+                transform: rotateX(180deg);
+                border-radius: 15px;
                 padding: 20px;
-                box-shadow: inset -5px 0 15px rgba(0,0,0,0.05);
+                box-shadow: inset 0 5px 15px rgba(0,0,0,0.05); /* Tạo bóng gấp khúc cạnh trên */
             }
 
         .left-page-title {
@@ -122,18 +135,21 @@
             font-size: 18px;
             margin-bottom: 20px;
             font-family: cursive;
+            text-align: center;
         }
 
+        /* CSS cho ảnh ở trang sau */
         .left-page-photo {
             width: 100%;
-            max-width: 250px;
-            aspect-ratio: 3/4;
+            max-width: 220px; /* Thu nhỏ ảnh một chút */
+            aspect-ratio: 3/4; /* Cắt ảnh theo tỷ lệ dọc */
             object-fit: cover;
             border-radius: 10px;
             border: 4px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
 
+        /* Trang trí bìa thiệp */
         .stamp {
             position: absolute;
             top: 15px;
@@ -156,6 +172,12 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        .cover-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 0;
+        }
+
         .tap-hint {
             margin-top: 30px;
             background: rgba(255,255,255,0.25);
@@ -166,7 +188,7 @@
         .finger-icon {
             font-size: 24px;
             display: inline-block;
-            animation: slideLeft 1s infinite alternate;
+            animation: bounceHint 1s infinite alternate;
         }
 
         @keyframes pulse {
@@ -182,14 +204,26 @@
                 transform: scale(1);
             }
         }
-
-        @keyframes slideLeft {
+        /* Chỉ tay xuống dưới để chạm */
+        @keyframes bounceHint {
             0% {
-                transform: translateX(5px);
+                transform: translateY(0);
             }
 
             100% {
-                transform: translateX(-5px);
+                transform: translateY(-6px);
+            }
+        }
+        /* Văn bản hiện dần lên sau một khoảng trễ */
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -198,9 +232,11 @@
 
     <div class="page-background">
         <div class="book-container">
+            <!-- Checkbox ẩn để điều khiển LẬT THIỆP -->
             <input type="checkbox" id="book-toggle" style="display: none;" />
+
             <div class="book">
-                <!-- Trang bên phải -->
+                <!-- Trang bên phải (Nội dung văn bản lười chúc) -->
                 <div class="book-inside">
                     <div class="flower-header">🌸 🌺 🌻 🌺 🌸</div>
                     <h1 class="inside-title">CHÚC MƯNG 20/10</h1>
@@ -208,21 +244,25 @@
                         <p class="highlight">Gửi người phụ nữ tuyệt vời nhất của con!</p>
                         <p>Nhân ngày Phụ nữ Việt Nam 20/10, con chúc mẹ luôn dồi dào sức khỏe, luôn vui vẻ, bình an và hạnh phúc bên gia đình.</p>
                         <p>Cảm ơn mẹ vì đã luôn hy sinh và dành trọn tình yêu thương cho con!</p>
+                        <p style="text-align: center; color: #888;">❤️</p>
                     </div>
                 </div>
 
                 <!-- Trang bìa lật sang trái -->
                 <label for="book-toggle" class="book-cover-wrapper">
+                    <!-- Bìa trước -->
                     <div class="book-cover front">
                         <div class="stamp">20/10</div>
                         <div class="cover-decor">🌹</div>
                         <h2 class="cover-title">THIỆP CHÚC MƯNG</h2>
                         <p class="cover-subtitle">Gửi Mẹ Yêu Thương ❤️</p>
                         <div class="tap-hint">
-                            <span class="finger-icon">👈</span>
-                            <p>Chạm để mở thiệp</p>
+                            <span class="finger-icon">👇</span>
+                            <p>Chạm để mở thiệp mẹ nhé!</p>
                         </div>
                     </div>
+
+                    <!-- Trang sau (Hiển thị ảnh khi lật ra) -->
                     <div class="book-cover back">
                         <h3 class="left-page-title">Mẹ Yêu Của Con</h3>
                         <img src="anh-me.jpg" alt="Ảnh Mẹ" class="left-page-photo" />
