@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày 20/10 Mẹ Yêu ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        .page-background {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .book-container {
+            perspective: 1500px;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 10px 15px 30px rgba(233, 30, 99, 0.25);
+            border-left: 12px solid #c2185b;
+        }
+
+        .book-inside {
+            padding: 30px 20px;
+            text-align: center;
+            min-height: 480px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .inside-title {
+            color: #d81b60;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .message-content {
+            color: #444;
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #c2185b;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .book-cover-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: left;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        #book-toggle:checked ~ .book .book-cover-wrapper {
+            transform: rotateY(-160deg);
+            pointer-events: none;
+        }
+
+        .book-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 15px 15px 0;
+            box-sizing: border-box;
+        }
+
+            .book-cover.front {
+                background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+                color: white;
+                padding: 30px 20px;
+                text-align: center;
+            }
+
+            .book-cover.back {
+                background: #fff0f5;
+                transform: rotateY(180deg);
+                border-radius: 15px 0 0 15px;
+                padding: 20px;
+                box-shadow: inset -5px 0 15px rgba(0,0,0,0.05);
+            }
+
+        .left-page-title {
+            color: #d81b60;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-family: cursive;
+        }
+
+        .left-page-photo {
+            width: 100%;
+            max-width: 250px;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .stamp {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.3);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .cover-decor {
+            font-size: 70px;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .cover-title {
+            font-size: 24px;
+            margin: 5px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tap-hint {
+            margin-top: 30px;
+            background: rgba(255,255,255,0.25);
+            padding: 10px 15px;
+            border-radius: 20px;
+        }
+
+        .finger-icon {
+            font-size: 24px;
+            display: inline-block;
+            animation: slideLeft 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideLeft {
+            0% {
+                transform: translateX(5px);
+            }
+
+            100% {
+                transform: translateX(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-background">
+        <div class="book-container">
+            <input type="checkbox" id="book-toggle" style="display: none;" />
+            <div class="book">
+                <!-- Trang bên phải -->
+                <div class="book-inside">
+                    <div class="flower-header">🌸 🌺 🌻 🌺 🌸</div>
+                    <h1 class="inside-title">CHÚC MƯNG 20/10</h1>
+                    <div class="message-content">
+                        <p class="highlight">Gửi người phụ nữ tuyệt vời nhất của con!</p>
+                        <p>Nhân ngày Phụ nữ Việt Nam 20/10, con chúc mẹ luôn dồi dào sức khỏe, luôn vui vẻ, bình an và hạnh phúc bên gia đình.</p>
+                        <p>Cảm ơn mẹ vì đã luôn hy sinh và dành trọn tình yêu thương cho con!</p>
+                    </div>
+                </div>
+
+                <!-- Trang bìa lật sang trái -->
+                <label for="book-toggle" class="book-cover-wrapper">
+                    <div class="book-cover front">
+                        <div class="stamp">20/10</div>
+                        <div class="cover-decor">🌹</div>
+                        <h2 class="cover-title">THIỆP CHÚC MƯNG</h2>
+                        <p class="cover-subtitle">Gửi Mẹ Yêu Thương ❤️</p>
+                        <div class="tap-hint">
+                            <span class="finger-icon">👈</span>
+                            <p>Chạm để mở thiệp</p>
+                        </div>
+                    </div>
+                    <div class="book-cover back">
+                        <h3 class="left-page-title">Mẹ Yêu Của Con</h3>
+                        <img src="anh-me.jpg" alt="Ảnh Mẹ" class="left-page-photo" />
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
